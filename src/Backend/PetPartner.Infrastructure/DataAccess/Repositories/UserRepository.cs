@@ -16,6 +16,8 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public async Task<bool> ExistActiveUserWithEmail(string email) => await _context.Users.AnyAsync(user => user.Email.Equals(email) && user.Active);
 
+    public async Task<bool> ExistActiveUserWithIdentifier(Guid userIdentifier) => await _context.Users.AnyAsync(user => user.UserIdentifier.Equals(userIdentifier) && user.Active);
+
     public async Task<Domain.Entities.User?> GetByEmailAndPassword(string email, string password)
     {
         return await _context
@@ -23,4 +25,13 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
             .AsNoTracking() //Sempre que houver certeza de ações que nao podem ser atualizadas(read-only), o AsNoTracking deve ser utilizado para melhorar a performance.
             .FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email) && user.Password.Equals(password));
     }
+
+    public async Task<Domain.Entities.User> GetById(long id)
+    {
+        return await _context
+            .Users
+            .FirstAsync(user => user.Id == id);
+    }
+
+    public void Update(Domain.Entities.User user) => _context.Users.Update(user);
 }
