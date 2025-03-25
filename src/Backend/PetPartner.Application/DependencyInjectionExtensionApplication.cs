@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetPartner.Application.Services.AutoMapper;
+using PetPartner.Application.UseCases.Login.DoLogin;
 using PetPartner.Application.UseCases.User.Register;
 
 namespace PetPartner.Application;
@@ -16,6 +17,7 @@ public static class DependencyInjectionExtensionApplication
     private static void AddUseCases(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection services, IConfiguration configuration)

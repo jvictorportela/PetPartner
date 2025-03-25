@@ -11,7 +11,6 @@ public class UserController : PetPartnerBaseController
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
     public async Task<IActionResult> Register([FromServices] IRegisterUserUseCase useCase, [FromBody] RequestRegisterUserJson request)
     {
-        //Validate retornando de forma desorganizada.
         var result = await useCase.Execute(request);
 
         return Created(string.Empty, result);
