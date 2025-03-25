@@ -1,7 +1,7 @@
 ﻿namespace PetPartner.Communication.Responses;
 
-public class ResponseRegisteredUserJson
+public class ResponseUserProfileJson
 {
     public string Name { get; set; } = string.Empty;
-    public ResponseTokensJson Tokens { get; set; } = default!;
+    public string Email { get; set; } = string.Empty;
 }

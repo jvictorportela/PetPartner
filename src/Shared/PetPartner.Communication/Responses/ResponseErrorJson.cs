@@ -9,6 +9,8 @@ public class ResponseErrorJson
         Errors = errors;
     }
 
+    public bool TokenIsExpired { get; set; }
+
     public ResponseErrorJson(string errorMessage)
     {
         Errors = new List<string>

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using PetPartner.Application.SharedValidators;
 using PetPartner.Communication.Requests;
 using PetPartner.Domain.Extensions;
 using PetPartner.Exceptions;
@@ -13,7 +14,7 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
             .WithMessage(ResourceMessagesException.NAME_EMPY);
         RuleFor(user => user.Email).NotEmpty()
             .WithMessage(ResourceMessagesException.EMAIL_EMPTY);
-        RuleFor(user => user.Password.Length).GreaterThanOrEqualTo(6).WithMessage(ResourceMessagesException.PASSWORD_GREATHER_OR_EQUAL_6);
+        RuleFor(user => user.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());
         When(user => string.IsNullOrEmpty(user.Email).IsFalse(), () =>
         {
             RuleFor(user => user.Email).EmailAddress()

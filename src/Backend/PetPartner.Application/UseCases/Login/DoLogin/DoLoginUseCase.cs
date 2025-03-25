@@ -2,6 +2,8 @@
 using PetPartner.Communication.Requests;
 using PetPartner.Communication.Responses;
 using PetPartner.Domain.Repositories.User;
+using PetPartner.Domain.Security.Criptography;
+using PetPartner.Domain.Security.Tokens;
 using PetPartner.Exceptions.ExceptionBase;
 
 namespace PetPartner.Application.UseCases.Login.DoLogin;
@@ -9,12 +11,14 @@ namespace PetPartner.Application.UseCases.Login.DoLogin;
 public class DoLoginUseCase : IDoLoginUseCase
 {
     private readonly IUserReadOnlyRepository _readOnlyRepository;
-    private readonly PasswordEncrypter _passwordEncrypter;
+    private readonly IPasswordEncrypter _passwordEncrypter;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
 
-    public DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, PasswordEncrypter passwordEncrypter)
+    public DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator accessTokenGenerator)
     {
         _readOnlyRepository = readOnlyRepository;
         _passwordEncrypter = passwordEncrypter;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisteredUserJson> Execute(RequestLoginJson request)
@@ -25,7 +29,11 @@ public class DoLoginUseCase : IDoLoginUseCase
 
         return new ResponseRegisteredUserJson
         {
-            Name = user.Name
+            Name = user.Name,
+            Tokens = new ResponseTokensJson
+            {
+                AccessToken = _accessTokenGenerator.Generate(user.UserIdentifier)
+            }
         };
     }
 }
