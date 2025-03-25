@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using PetPartner.Communication.Requests;
 using PetPartner.Domain.Extensions;
+using PetPartner.Exceptions;
 
 namespace PetPartner.Application.UseCases.User.Register;
 
@@ -9,13 +10,14 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
     public RegisterUserValidator()
     {
         RuleFor(user => user.Name).NotEmpty()
-            .WithMessage("Name is required");
+            .WithMessage(ResourceMessagesException.NAME_EMPY);
         RuleFor(user => user.Email).NotEmpty()
-            .WithMessage("Email is required");
+            .WithMessage(ResourceMessagesException.EMAIL_EMPTY);
+        RuleFor(user => user.Password.Length).GreaterThanOrEqualTo(6).WithMessage(ResourceMessagesException.PASSWORD_GREATHER_OR_EQUAL_6);
         When(user => string.IsNullOrEmpty(user.Email).IsFalse(), () =>
         {
             RuleFor(user => user.Email).EmailAddress()
-                 .WithMessage("Email is invalid");
+                 .WithMessage(ResourceMessagesException.EMAIL_INVALID);
         });
     }
 }

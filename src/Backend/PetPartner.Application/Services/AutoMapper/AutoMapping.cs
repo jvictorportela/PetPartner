@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using PetPartner.Communication.Requests;
 using PetPartner.Communication.Responses;
-using PetPartner.Domain.Entities;
-using System.Drawing;
 
 namespace PetPartner.Application.Services.AutoMapper;
 
@@ -16,13 +14,13 @@ public class AutoMapping :  Profile
 
     private void RequestToDomain()
     {
-        CreateMap<RequestRegisterUserJson, User>()
+        CreateMap<RequestRegisterUserJson, Domain.Entities.User>() //FONTE, DESTINO
             .ForMember(dest => dest.Password, opt => opt.Ignore())
             .ForMember(dest => dest.Address, opt => opt.Ignore());
     }
 
     private void DomainToResponse()
     {
-        CreateMap<User, ResponseRegisteredUserJson>();
+        CreateMap<Domain.Entities.User, ResponseRegisteredUserJson>();
     }
 }

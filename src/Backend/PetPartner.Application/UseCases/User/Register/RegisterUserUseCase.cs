@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PetPartner.Application.Services.Cryptography;
 using PetPartner.Communication.Requests;
 using PetPartner.Communication.Responses;
 using PetPartner.Domain.Repositories;
@@ -29,6 +30,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         await Validate(request);
 
         var user = _mapper.Map<Domain.Entities.User>(request);
+        user.Password = new PasswordEncrypter().Encrypt(request.Password);
 
         await _writeOnlyRepository.Add(user);
         await _unitOfWork.Commit();
@@ -48,7 +50,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var emailExist = await _readOnlyRepository.ExistActiveUserWithEmail(request.Email);
 
         if (emailExist)
-            result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, "Email all ready registered."));
+            result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, "Email already registered."));
 
         if (!result.IsValid)
         {
