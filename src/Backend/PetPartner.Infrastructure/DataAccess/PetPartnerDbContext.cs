@@ -10,6 +10,8 @@ public class PetPartnerDbContext : DbContext
 
     public DbSet<Domain.Entities.User> Users { get; set; }
     public DbSet<Domain.Entities.Address> Addresses { get; set; }
+    public DbSet<Domain.Entities.Pet> Pets { get; set; }
+    public DbSet<Domain.Entities.Picture> Pictures { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
