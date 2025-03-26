@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\Address\" />
+    <Folder Include="Responses\Picture\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
-﻿namespace PetPartner.Domain.Entities;
+﻿namespace PetPartner.Communication.Requests.Address;
 
-public class Address : EntityBase
+public class RequestAddressJson
 {
     public string Street { get; set; } = string.Empty; //RUA
     public string Number { get; set; } = string.Empty; //NÚMERO
@@ -10,5 +10,4 @@ public class Address : EntityBase
     public string City { get; set; } = string.Empty; //CIDADE
     public string State { get; set; } = string.Empty; //ESTADO
     public string ZipCode { get; set; } = string.Empty; //CEP
-    public long UserId { get; set; }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PetPartner.Application.Services.AutoMapper;
 using PetPartner.Application.UseCases.Login.DoLogin;
+using PetPartner.Application.UseCases.Pet;
 using PetPartner.Application.UseCases.User.ChangePassword;
 using PetPartner.Application.UseCases.User.Profile;
 using PetPartner.Application.UseCases.User.Register;
@@ -24,6 +25,7 @@ public static class DependencyInjectionExtensionApplication
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+        services.AddScoped<IRegisterPetUseCase, RegisterPetUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection services, IConfiguration configuration)

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetPartner.Domain.Repositories;
+using PetPartner.Domain.Repositories.Pet;
 using PetPartner.Domain.Repositories.User;
 using PetPartner.Domain.Security.Criptography;
 using PetPartner.Domain.Security.Tokens;
@@ -36,6 +37,7 @@ public static class DependencyInjectionExtensionInfra
         services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IPetWriteOnlyRepositoy, PetRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

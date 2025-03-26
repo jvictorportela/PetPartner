@@ -22,6 +22,7 @@ public class Version0000001 : VersionBase
             .WithColumn("City").AsString(255).NotNullable()
             .WithColumn("State").AsString(100).NotNullable()
             .WithColumn("ZipCode").AsString(20).NotNullable()
-            .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Addresses_Users_Id", "Users", "Id");
+            .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Addresses_Users_Id", "Users", "Id")
+            .OnDelete(System.Data.Rule.Cascade);
     }
 }
