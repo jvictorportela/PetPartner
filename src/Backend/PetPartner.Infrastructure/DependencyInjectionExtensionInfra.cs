@@ -38,6 +38,7 @@ public static class DependencyInjectionExtensionInfra
         services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPetWriteOnlyRepositoy, PetRepository>();
+        services.AddScoped<IPetUpdateOnlyRepository, PetRepository>();
     }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

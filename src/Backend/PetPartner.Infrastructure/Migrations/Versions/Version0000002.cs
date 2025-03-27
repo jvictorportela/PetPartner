@@ -15,7 +15,7 @@ public class Version0000002 : VersionBase
             .WithColumn("Gender").AsString(10).NotNullable() // "Male" or "Female"
             .WithColumn("HasPedigree").AsBoolean().Nullable()
             .WithColumn("Color").AsString(50).Nullable()
-            .WithColumn("Weight").AsDecimal(5, 2).Nullable()
+            //.WithColumn("Weight").AsDecimal(5, 2).Nullable()
 
             // Health Information
             .WithColumn("Vaccinated").AsBoolean().NotNullable()
@@ -25,7 +25,7 @@ public class Version0000002 : VersionBase
             // Availability for Sale or Adoption
             .WithColumn("AvailableForSale").AsBoolean().NotNullable()
             .WithColumn("AvailableForAdoption").AsBoolean().NotNullable()
-            .WithColumn("Price").AsDecimal(10, 2).Nullable()
+            .WithColumn("Price").AsDouble().Nullable()
 
             // Breeding Information
             .WithColumn("AvailableForBreeding").AsBoolean().NotNullable()

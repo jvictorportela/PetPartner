@@ -7,6 +7,7 @@ using PetPartner.Application.UseCases.User.ChangePassword;
 using PetPartner.Application.UseCases.User.Profile;
 using PetPartner.Application.UseCases.User.Register;
 using PetPartner.Application.UseCases.User.Update;
+using Sqids;
 
 namespace PetPartner.Application;
 
@@ -30,9 +31,15 @@ public static class DependencyInjectionExtensionApplication
 
     private static void AddAutoMapper(IServiceCollection services, IConfiguration configuration)
     {
+        var sqids = new SqidsEncoder<long>(new()
+        {
+            MinLength = 3,
+            Alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!
+        });
+
         services.AddScoped(option => new AutoMapper.MapperConfiguration(options =>
         {
-            options.AddProfile(new AutoMapping());
+            options.AddProfile(new AutoMapping(sqids));
         }).CreateMapper());
     }
 }

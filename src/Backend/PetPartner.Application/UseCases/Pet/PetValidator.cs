@@ -23,12 +23,12 @@ public class PetValidator : AbstractValidator<RequestPetJson>
         RuleFor(pet => pet.BirthDate)
             .LessThan(DateTime.UtcNow).WithMessage("The birth date must be in the past.");
 
-        RuleFor(pet => pet.Weight)
-            .GreaterThan(0).When(pet => pet.Weight.HasValue)
-            .WithMessage("The weight must be a positive number.");
+        //RuleFor(pet => pet.Weight)
+        //    .GreaterThan(0).When(pet => pet.Weight.HasValue)
+        //    .WithMessage("The weight must be a positive number.");
 
         RuleFor(pet => pet.Price)
-            .GreaterThan(0).When(pet => pet.Price.HasValue)
+            .GreaterThan(0).When(pet => pet.AvailableForSale == true)
             .WithMessage("The price must be greater than zero.");
 
         RuleFor(pet => pet.AvailableForAdoption)
