@@ -4,7 +4,6 @@ using PetPartner.Api.Filters;
 using PetPartner.Api.Middleware;
 using PetPartner.Api.Token;
 using PetPartner.Application;
-using PetPartner.Application.Services.Cryptography;
 using PetPartner.Domain.Security.Tokens;
 using PetPartner.Infrastructure;
 using PetPartner.Infrastructure.Extensions;

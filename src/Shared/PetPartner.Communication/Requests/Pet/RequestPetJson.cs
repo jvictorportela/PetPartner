@@ -11,7 +11,7 @@ public class RequestPetJson
     public string Gender { get; set; } = string.Empty; // "Male" or "Female"
     public bool? HasPedigree { get; set; } // True = has pedigree
     public string? Color { get; set; }
-    public decimal? Weight { get; set; } // In Kg
+    //public decimal? Weight { get; set; } // In Kg
 
     // Health Information
     public bool Vaccinated { get; set; } = true;
@@ -21,7 +21,7 @@ public class RequestPetJson
     // Availability for Sale or Adoption
     public bool AvailableForSale { get; set; } = true;
     public bool AvailableForAdoption { get; set; } = true;
-    public decimal? Price { get; set; } // Nullable, since it may be for adoption
+    public double? Price { get; set; } // Nullable, since it may be for adoption
 
     // Breeding Information (if the pet is a breeder)
     public bool AvailableForBreeding { get; set; } = true;
